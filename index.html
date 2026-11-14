@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h2>Online Examination System</h2>
+
+<div id="login">
+    <input id="name" placeholder="Enter Username">
+    <button onclick="login()">Login</button>
+</div>
+
+<div id="exam" style="display:none;">
+    <h3 id="welcome"></h3>
+
+    <form id="quiz" onsubmit="Exam(event)">
+        <p>1. HTML stands for?</p>
+        <input type="radio" name="q1" value="1"> Hyper Text Markup Language
+        <input type="radio" name="q1" value="0"> High Text Machine Language
+
+        <p>2. Which language is used for styling?</p>
+        <input type="radio" name="q2" value="0"> HTML
+        <input type="radio" name="q2" value="1"> CSS <br>
+        <button type="submit">Submit Exam</button>
+    </form>
+</div>
+
+<div id="result" style="display:none;">
+    <h2>Exam Result</h2>
+    <h3 id="s"></h3>
+</div>
+
+<script>
+function login() {
+    let name = document.getElementById("name").value;
+    if(name.trim() == "") {
+        alert("Invalid Login!");
+        return;
+    }
+    document.getElementById("login").style.display = "none";
+    document.getElementById("exam").style.display = "block";
+      document.getElementById("welcome").innerHTML = "Welcome " + name;
+}
+
+function Exam(event) {
+    event.preventDefault();
+
+    let s = 0;
+
+    document.querySelectorAll('#quiz input:checked').forEach(a => {
+        s += Number(a.value);
+    });
+
+    document.getElementById("exam").style.display = "none";
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("s").innerHTML = "Your Score: " + s + " / 2";
+}
+</script>
+
+</body>
+</html>
